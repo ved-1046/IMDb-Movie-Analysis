@@ -1,38 +1,52 @@
 # 🎬 IMDb Movie Analysis
 
-A simple data analysis project on the IMDb Movie Dataset using Python. In this project, I explored the dataset, answered a few interesting questions, and visualized the results using Matplotlib.
+An exploratory data analysis (EDA) project on the IMDb Movie Dataset using Python.
 
-## Tools Used
+The goal of this project was to understand the dataset, clean missing values, explore movie trends, and present the findings through visualizations and a simple dashboard.
+
+## 📊 Analysis Performed
+
+- Top 10 highest-rated movies
+- Directors with the highest average ratings
+- Highest-rated movie genres
+- Movies released each year
+- Highest revenue-generating movies
+- Most voted movies
+- Average movie rating by year
+- Average runtime by genre
+
+## 🛠️ Tech Stack
 
 - Python
 - Pandas
 - NumPy
 - Matplotlib
+- Seaborn
 
-## What I Analyzed
+## 📁 Project Structure
 
-- Top 10 highest-rated movies
-- Directors with the highest average ratings
-- Highest-rated genres
-- Movies released each year
-- Highest revenue movies
-- Most voted movies
-- Missing values in the dataset
+```text
+IMDb-Movie-Analysis/
+│── imdb_movie_analysis.py
+│── IMDB-Movie-Data.csv
+│── dashboard.png
+│── README.md
+```
 
-## Dashboard
+## 📸 Dashboard
 
-<img width="1536" height="754" alt="Figure_1" src="https://github.com/user-attachments/assets/4982bfb7-ab0b-451b-9d27-5a90b9e78b0e" />
+![IMDb Dashboard](dashboard.png)
 
+## 🌱 What I Learned
 
-## What I Learned
+Through this project, I improved my understanding of:
 
-This project helped me practice:
-- Working with real datasets
-- Data cleaning and exploration
-- `groupby()`, `value_counts()`, and `sort_values()`
-- Creating visualizations using Matplotlib
-- Building a simple dashboard with subplots
+- Exploratory Data Analysis (EDA)
+- Data cleaning and preprocessing
+- Data manipulation using Pandas
+- Data visualization with Matplotlib and Seaborn
+- Building simple analytical dashboards
 
-## Author
+## 👩‍💻 Author
 
-Vedika Tamshetti
+**Vedika Tamshetti**
