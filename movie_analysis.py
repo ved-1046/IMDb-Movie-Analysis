@@ -87,4 +87,5 @@ axes[1,1].set_ylabel('Number of Movies')
 axes[1,1].grid(True)
 
 plt.tight_layout()
+plt.savefig("dashboard.png", dpi=300)
 plt.show()
