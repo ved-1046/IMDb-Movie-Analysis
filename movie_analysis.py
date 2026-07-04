@@ -12,7 +12,7 @@ print(df.describe())
 print(df.duplicated().sum())
 print(df.shape)
 print(df.columns)
-print(df.head(5))
+# print(df.head(5))
 
 df['Revenue (Millions)'] = df['Revenue (Millions)'].fillna(df['Revenue (Millions)'].median())
 df['Metascore'] = df['Metascore'].fillna(df['Metascore'].median())
@@ -54,22 +54,24 @@ print(yearly_rating.head(10))
 runtime_avg = df.groupby('Genre')['Runtime (Minutes)'].mean().sort_values(ascending = False)
 print(runtime_avg.head(10))
 
-
-
 fig , axes = plt.subplots(2,2,figsize = (16,10))
 
-sns.barplot(
-    data = top_movies.head(10),
-    x = "Rating",
-    y ='Title',
-    ax = axes[0,0],
-    color = 'royalblue'
-)
+sns.histplot(
+    data = df,
+    x = 'Rating',
+    bins = 15,
+    kde = True,
+    color = 'royalblue',
+    ax = axes[0,0]
+    )
 
-axes[0,0].set_title('Top 10 highest rated movies',fontsize = 13,
-    fontweight = 'bold')
+axes[0,0].set_title('Distribution of IMDb ratings',
+                    fontsize = 13,
+                    fontweight = 'bold')
+
 axes[0,0].set_xlabel('IMDb Rating',fontsize = 11)
-axes[0,0].set_ylabel('Movie Title')
+
+axes[0,0].set_ylabel('No of movies',fontsize = 11)
 
 director_df = director_rating.head(10).reset_index()
 director_df.columns = ['Director' , 'Rating']
@@ -112,7 +114,6 @@ axes[1,1].plot(
     markersize = 7,
     color = 'crimson',
     linestyle = '--',
-    
 )
 
 axes[1,1].set_title('Movie releases',fontsize = 10 , fontweight = 'bold')
@@ -128,4 +129,63 @@ plt.suptitle(
 
 plt.tight_layout(rect=[0,0,1,0.96])
 plt.savefig("dashboard.png", dpi=300,bbox_inches = 'tight')
+plt.show()
+
+#relationship between ratings and revenue
+plt.figure(figsize=(8,5))
+
+sns.scatterplot( #relationship between two numerical values
+    data = df,
+    x = 'Rating',
+    y = 'Revenue (Millions)',
+    color = 'darkorange',
+    alpha = 0.6 ,#--> gives us the opacity of the scattered plots here,
+   
+)
+corr = df[['Rating','Revenue (Millions)']].corr(numeric_only = True)
+print(corr)
+plt.title('IMDb Ratings vs Revenue')
+plt.xlabel("IMDb Ratings")
+plt.ylabel('Revenue (Millions)')
+plt.savefig("Rating_vs_Revenue(Millions).png", dpi=300,bbox_inches = 'tight')
+plt.show()
+
+plt.figure(figsize=(8,5))
+sns.scatterplot(
+    data = df,
+    x = 'Rating',
+    y = 'Votes',
+    color = 'red',
+)
+
+corr = df[['Rating','Votes']].corr(numeric_only = True)
+print(corr)
+plt.title('IMDb Ratings vs Votes')
+plt.xlabel("IMDb Ratings")
+plt.ylabel('Votes')
+plt.savefig("ratings_vs_votes.png", dpi=300,bbox_inches = 'tight')
+plt.show()
+
+corr_matrix = df[
+    ['Rating',
+     'Votes',
+     'Revenue (Millions)',
+     'Runtime (Minutes)',
+     'Metascore',
+     'Year']
+
+].corr(numeric_only = True)
+print(corr_matrix)
+
+plt.figure(figsize=(8,6))
+
+sns.heatmap(
+    corr_matrix, #instead of plotting original data frame we r plotting correlation matrix
+    annot = True,#displays correlation values inside each cell
+    cmap = 'coolwarm',
+    fmt = '.2f', #formats to 2 deicmal places
+)
+
+plt.title('Correlation Heatmap')
+plt.savefig("correlation_heatmap.png", dpi=300,bbox_inches = 'tight')
 plt.show()
